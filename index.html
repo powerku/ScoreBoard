@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .top {
+            height: 100%;
+            width: 100%;
+            /*   background:black; */
+            /*   color:yellow; */
+        }
+
+        .top div {
+            display: inline-block;
+        }
+
+        .top .home-score {
+            width: 30%;
+        }
+
+        .top .timer {
+            width: 39%;
+        }
+
+        .top .away-score {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="home-score">00</div>
+        <div class="timer">
+            <div class="min"></div>:
+            <div class="sec"></div>
+        </div>
+        <div class="away-score">00</div>
+    </div>
+</body>
+
+<script>
+    var playing = false;
+    var playTime = null;
+    var playMin = 01;
+    var playSec = 00;
+    $(document).ready(function () {
+
+
+        $(".timer .min").text(playMin);
+        $(".timer .sec").text(playSec);
+
+        $(".home-score").on('click', function () {
+            addScore($(this));
+        });
+
+        $(".away-score").on('click', function () {
+            addScore($(this));
+        });
+
+        $(".timer").on('click', function () {
+            if (playing === false) {
+                startGame();
+            } else {
+                stopGame();
+            }
+        });
+
+        function startGame() {
+            playing = true;
+            playTime = setInterval(function () {
+                if (playMin <= 0 && playSec <= 0) {
+                    stopGame();
+                    return;
+                }
+                if (playSec <= 0) {
+                    playSec = 59;
+                    playMin -= 1;
+                } else {
+                    playSec--;
+                }
+                $('.timer .min').text(playMin);
+                $('.timer .sec').text(playSec);
+            }, 1000)
+        }
+
+        function stopGame() {
+            clearInterval(playTime);
+            playing = false;
+        }
+
+        function addScore($score) {
+            var score = $score.text();
+            score++;
+            if (score < 10) {
+                score = '0' + score;
+            }
+            $score.text(score);
+
+        }
+    });
+</script>
+
+</html>
