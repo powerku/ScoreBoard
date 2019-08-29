@@ -3,166 +3,69 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
-    <style>
-        html {
-            height: 100%;
-        }
+    <link rel="stylesheet" href="css/board.css" />
 
-        body {
-            height: 100%;
-            background: black;
-        }
-
-        .btn-list {
-            height: 40px;
-            list-style: none;
-        }
-
-        button {
-            width: 100px;
-            height: 40px;
-        }
-
-        .timer-button {
-            font-size: 0px;
-        }
-
-
-        .top {
-            width: 100%;
-            color: yellow;
-            text-align: center;
-        }
-
-        .bottom {
-            width: 100%;
-            color: yellow;
-            text-align: center;
-        }
-
-        .top>div {
-            display: inline-block;
-        }
-
-        .bottom>div {
-            display: inline-block;
-        }
-
-        .bottom .home-score {
-            width: 30%;
-            color: red;
-        }
-
-        .bottom .home-score .score {
-            font-size: 120px;
-        }
-
-        .top .timer {
-            width: 35%;
-            font-size: 120px;
-            color: red;
-        }
-
-        .top .home-poul {
-            width: 30%;
-        }
-
-        .bottom .shot-clock {
-            width: 35%;
-        }
-
-        .top .away-poul {
-            width: 30%;
-        }
-
-        .top .timer .min {
-            display: inline-block;
-        }
-
-        .top .timer .sec {
-            display: inline-block;
-        }
-
-        .bottom .away-score {
-            width: 30%;
-            color: red;
-        }
-
-        .bottom .away-score .score {
-            font-size: 120px;
-        }
-
-        .top .home-poul .count {
-            font-size: 60px;
-        }
-
-        .top .away-poul .count {
-            font-size: 60px;
-        }
-
-        .shot-clock .sec {
-            font-size: 60px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="top">
-        <div class="home-poul">
-            <div class="count">0</div>
-            <div>
-                <button class="up">+</button>
-                <button class="down">-</button>
-            </div>
-        </div>
-        <div class="timer">
-            <div class="min"></div>:
-            <div class="sec"></div>
-            <div class="timer-button">
-                <button class="start">start/stop</button>
-                <button class="reset">reset</button>
-            </div>
-        </div>
-        <div class="away-poul">
-            <div class="count">0</div>
-            <div>
-                <button class="up">+</button>
-                <button class="down">-</button>
-            </div>
+<div class="top">
+    <div class="home-poul">
+        <div class="count">0</div>
+        <div>
+            <button class="up">+</button>
+            <button class="down">-</button>
         </div>
     </div>
-    <div class="bottom">
-        <div class="home-score">
-            <div class="score">00</div>
-            <div class="btn-list">
-                <button class="minus-1p">-1p</button>
-                <button class="1p">1p</button>
-                <button class="2p">2p</button>
-                <button class="3p">3p</button>
-            </div>
+    <div class="timer">
+        <div class="min"></div>
+        :
+        <div class="sec"></div>
+        <div class="timer-button">
+            <button class="start">start/stop</button>
+            <button class="reset">reset</button>
         </div>
-        <div class="shot-clock">
-            <div class="sec">24</div>
-            <div>
-                <button class="start">start/stop</button>
-                <button class="up">+</button>
-                <button class="down">-</button>
-                <button class="reset">reset</button>
-                <button class="14sec">14</button>
-            </div>
+    </div>
+    <div class="away-poul">
+        <div class="count">0</div>
+        <div>
+            <button class="up">+</button>
+            <button class="down">-</button>
         </div>
-        <div class="away-score">
-            <div class="score">00</div>
-            <div class="btn-list">
-                <button class="minus-1p">-1p</button>
-                <button class="1p">1p</button>
-                <button class="2p">2p</button>
-                <button class="3p">3p</button>
-            </div>
+    </div>
+</div>
+<div class="bottom">
+    <div class="home-score">
+        <div class="score">00</div>
+        <div class="btn-list">
+            <button class="minus-1p">-1p</button>
+            <button class="1p">1p</button>
+            <button class="2p">2p</button>
+            <button class="3p">3p</button>
         </div>
+    </div>
+    <div class="shot-clock">
+        <div class="sec">24</div>
+        <div>
+            <button class="start">start/stop</button>
+            <button class="up">+</button>
+            <button class="down">-</button>
+            <button class="reset">reset</button>
+            <button class="14sec">14</button>
+        </div>
+    </div>
+    <div class="away-score">
+        <div class="score">00</div>
+        <div class="btn-list">
+            <button class="minus-1p">-1p</button>
+            <button class="1p">1p</button>
+            <button class="2p">2p</button>
+            <button class="3p">3p</button>
+        </div>
+    </div>
 
-    </div>
+</div>
 
 
 </body>
@@ -171,7 +74,7 @@
     var playing = false;
     var playTime = null;
     var playMin = 10;
-    var playSec = 00;
+    var playSec = 0;
     var offence = false;
     var offenceTime = null;
     var offenceSec = 24;
@@ -218,10 +121,10 @@
 
     $(".timer .min").on("click", function () {
         var curMin = playMin;
-        
+
         playMin = prompt("분을 입력하세요.");
-        
-        if(playMin === '' || playMin === null){
+
+        if (playMin === '' || playMin === null) {
             playMin = curMin;
         }
         $('.timer .min').text(playMin);
@@ -229,10 +132,10 @@
 
     $(".timer .sec").on("click", function () {
         var curSec = playSec;
-        
+
         playSec = prompt("초를 입력하세요.");
-        
-        if(playSec === '' || playSec === null){
+
+        if (playSec === '' || playSec === null) {
             playSec = curSec;
         }
 
